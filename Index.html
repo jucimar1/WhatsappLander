@@ -3,33 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hortifruti & Açougue | Inhumas-GO</title>
-    <!-- Conecta com o arquivo de estilo -->
+    <title>Ofertas do Dia | Inhumas-GO</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Fonte moderna do Google -->
     <link href="https://googleapis.com" rel="stylesheet">
 </head>
 <body>
 
+    <!-- BARRA DE URGÊNCIA -->
+    <div class="timer-bar">
+        ⚠️ Ofertas expiram em: <span id="countdown">00:00:00</span>
+    </div>
+
     <header>
         <div class="container">
             <h1>Hortifruti <span>&</span> Açougue</h1>
-            <p>Ofertas de hoje em Inhumas</p>
+            <p>Os melhores preços de Inhumas direto no seu Zap!</p>
         </div>
     </header>
 
     <main class="container">
+        <!-- SEÇÃO HORTIFRUTI -->
         <section>
-            <h2>🍎 Hortifruti Fresquinho</h2>
-            <div class="grid" id="horti-lista">
-                <!-- O JS pode preencher aqui depois -->
+            <h2>🍎 Direto do Produtor</h2>
+            <div class="grid">
                 <div class="card">
+                    <div class="badge">Oferta</div>
                     <img src="https://unsplash.com" alt="Maçã">
                     <div class="info">
-                        <span class="nome">Maçã Gala</span>
-                        <span class="preco">R$ 7,90 kg</span>
+                        <span class="nome">Maçã Gala Selecionada</span>
+                        <span class="preco">R$ 7,90 <small>kg</small></span>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO AÇOUGUE -->
+        <section>
+            <h2>🥩 Carnes de Primeira</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="badge">Destaque</div>
+                    <img src="https://unsplash.com" alt="Picanha">
+                    <div class="info">
+                        <span class="nome">Picanha Premium Argentina</span>
+                        <span class="preco">R$ 64,90 <small>kg</small></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROVA SOCIAL (SIMULADA) -->
+        <div id="social-proof" class="social-proof">
+            ✅ Alguém de Inhumas acabou de pedir!
+        </div>
+    </main>
+
+    <!-- BOTÃO FLUTUANTE ZAP -->
+    <a href="https://wa.me" class="zap-floating" target="_blank">
+        <img src="https://wikimedia.org" alt="WhatsApp">
+        <span class="notification-dot">1</span>
+    </a>
+
+    <footer>
+        <p>&copy; 2024 Mercado Central Inhumas<br>Desenvolvido por Seu Nome</p>
+    </footer>
+
+    <script>
+        // CRONÔMETRO DE URGÊNCIA (Lógica Simples)
+        function startTimer(duration, display) {
+            var timer = duration, hours, minutes, seconds;
+            setInterval(function () {
+                hours = parseInt(timer / 3600, 10);
+                minutes = parseInt((timer % 3600) / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                display.textContent = 
+                    (hours < 10 ? "0" + hours : hours) + ":" + 
+                    (minutes < 10 ? "0" + minutes : minutes) + ":" + 
+                    (seconds < 10 ? "0" + seconds : seconds);
+
+                if (--timer < 0) timer = duration;
+            }, 1000);
+        }
+
+        window.onload = function () {
+            var fiveHours = 60 * 60 * 5;
+            var display = document.querySelector('#countdown');
+            startTimer(fiveHours, display);
+            
+            // Mostrar Prova Social após 3 segundos
+            setTimeout(() => {
+                document.getElementById('social-proof').classList.add('show');
+            }, 3000);
+        };
+    </script>
+</body>
+</html>
             </div>
         </section>
 
